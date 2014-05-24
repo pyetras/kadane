@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		02804851192E5BAC001CB8D4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02804850192E5BAC001CB8D4 /* main.cpp */; };
 		02804853192E5BAC001CB8D4 /* zad3.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 02804852192E5BAC001CB8D4 /* zad3.1 */; };
+		0280485E192E7041001CB8D4 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 02804859192E7041001CB8D4 /* Makefile */; };
+		0280485F192E7041001CB8D4 /* matgen-mt.c in Sources */ = {isa = PBXBuildFile; fileRef = 0280485A192E7041001CB8D4 /* matgen-mt.c */; };
+		02804860192E7041001CB8D4 /* msp-par.c in Sources */ = {isa = PBXBuildFile; fileRef = 0280485C192E7041001CB8D4 /* msp-par.c */; };
+		02804861192E7041001CB8D4 /* msp-seq-naive.c in Sources */ = {isa = PBXBuildFile; fileRef = 0280485D192E7041001CB8D4 /* msp-seq-naive.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +32,11 @@
 		0280484D192E5BAC001CB8D4 /* zad3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = zad3; sourceTree = BUILT_PRODUCTS_DIR; };
 		02804850192E5BAC001CB8D4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		02804852192E5BAC001CB8D4 /* zad3.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = zad3.1; sourceTree = "<group>"; };
+		02804859192E7041001CB8D4 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = SOURCE_ROOT; };
+		0280485A192E7041001CB8D4 /* matgen-mt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "matgen-mt.c"; sourceTree = SOURCE_ROOT; };
+		0280485B192E7041001CB8D4 /* matgen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matgen.h; sourceTree = SOURCE_ROOT; };
+		0280485C192E7041001CB8D4 /* msp-par.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "msp-par.c"; sourceTree = SOURCE_ROOT; };
+		0280485D192E7041001CB8D4 /* msp-seq-naive.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "msp-seq-naive.c"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +70,11 @@
 			isa = PBXGroup;
 			children = (
 				02804850192E5BAC001CB8D4 /* main.cpp */,
+				02804859192E7041001CB8D4 /* Makefile */,
+				0280485A192E7041001CB8D4 /* matgen-mt.c */,
+				0280485B192E7041001CB8D4 /* matgen.h */,
+				0280485C192E7041001CB8D4 /* msp-par.c */,
+				0280485D192E7041001CB8D4 /* msp-seq-naive.c */,
 				02804852192E5BAC001CB8D4 /* zad3.1 */,
 			);
 			path = zad3;
@@ -117,7 +131,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02804861192E7041001CB8D4 /* msp-seq-naive.c in Sources */,
+				0280485E192E7041001CB8D4 /* Makefile in Sources */,
 				02804851192E5BAC001CB8D4 /* main.cpp in Sources */,
+				02804860192E7041001CB8D4 /* msp-par.c in Sources */,
+				0280485F192E7041001CB8D4 /* matgen-mt.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +213,11 @@
 		02804857192E5BAC001CB8D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/usr/local/Cellar/open-mpi/1.8.1/**",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -202,6 +225,11 @@
 		02804858192E5BAC001CB8D4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/usr/local/Cellar/open-mpi/1.8.1/**",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
