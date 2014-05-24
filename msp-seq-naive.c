@@ -101,7 +101,9 @@ int main(int argc, char * argv[])
   {
     matrixPtr[j * (numColumns + 1)] = 0;
   }
-  /* printMatrix(matrixPtr, numRows, numColumns); */
+  
+  printMatrix(matrixPtr, numRows, numColumns);
+  
   maxSum = matrixPtr[numColumns + 1 + 1];
   bestI = bestJ = bestK = bestL = 1;
   for (j = 1; j <= numRows; ++j)
@@ -114,7 +116,9 @@ int main(int argc, char * argv[])
       matrixPtr[(j - 1) * (numColumns + 1) + i - 1];
     }
   }
-  /* printMatrix(matrixPtr, numRows, numColumns); */
+  
+  printMatrix(matrixPtr, numRows, numColumns);
+  
   for (j = 0; j < numRows; ++j)
   {
     for (i = 0; i < numColumns; ++i)

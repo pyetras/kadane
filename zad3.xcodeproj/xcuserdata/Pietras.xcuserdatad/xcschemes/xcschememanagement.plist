@@ -4,15 +4,25 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>zad3.xcscheme</key>
+		<key>par.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>seq.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>0280484C192E5BAC001CB8D4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>02804865193117DE001CB8D4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
