@@ -1,0 +1,5 @@
+results.csv
+*.o
+zad2/res*
+zad2/brandes
+*.exe
