@@ -5,7 +5,7 @@ random.seed()
 wd = os.getcwd()
 d = os.path.dirname(os.path.abspath(__file__))
 
-failed = True
+failed = False
 
 for tests in [[[10, 64, 100][i/3], [10, 64, 100][i%3], random.randrange(1000)] for i in range(9)]:
   print tests,

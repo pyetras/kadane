@@ -12,6 +12,8 @@
 		02804860192E7041001CB8D4 /* msp-par.c in Sources */ = {isa = PBXBuildFile; fileRef = 0280485C192E7041001CB8D4 /* msp-par.c */; };
 		028048711931186D001CB8D4 /* matgen-mt.c in Sources */ = {isa = PBXBuildFile; fileRef = 0280485A192E7041001CB8D4 /* matgen-mt.c */; };
 		0280487519313EFE001CB8D4 /* msp-seq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0280487419313EFE001CB8D4 /* msp-seq.cpp */; };
+		02EF01691932893E00E1BD34 /* common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02EF01671932893E00E1BD34 /* common.cpp */; };
+		02EF016A1932893E00E1BD34 /* common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02EF01671932893E00E1BD34 /* common.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,9 +42,11 @@
 		02804859192E7041001CB8D4 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = SOURCE_ROOT; };
 		0280485A192E7041001CB8D4 /* matgen-mt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "matgen-mt.c"; sourceTree = SOURCE_ROOT; };
 		0280485B192E7041001CB8D4 /* matgen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matgen.h; sourceTree = SOURCE_ROOT; };
-		0280485C192E7041001CB8D4 /* msp-par.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "msp-par.c"; sourceTree = SOURCE_ROOT; };
+		0280485C192E7041001CB8D4 /* msp-par.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = "msp-par.c"; sourceTree = SOURCE_ROOT; };
 		02804866193117DE001CB8D4 /* seq */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = seq; sourceTree = BUILT_PRODUCTS_DIR; };
 		0280487419313EFE001CB8D4 /* msp-seq.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "msp-seq.cpp"; sourceTree = SOURCE_ROOT; };
+		02EF01671932893E00E1BD34 /* common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = common.cpp; sourceTree = "<group>"; };
+		02EF01681932893E00E1BD34 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,8 @@
 			children = (
 				0280485A192E7041001CB8D4 /* matgen-mt.c */,
 				0280485B192E7041001CB8D4 /* matgen.h */,
+				02EF01671932893E00E1BD34 /* common.cpp */,
+				02EF01681932893E00E1BD34 /* common.h */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -119,6 +125,7 @@
 				02804849192E5BAC001CB8D4 /* Sources */,
 				0280484A192E5BAC001CB8D4 /* Frameworks */,
 				0280484B192E5BAC001CB8D4 /* CopyFiles */,
+				02EF016B19328E9000E1BD34 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -188,6 +195,19 @@
 			shellPath = /bin/sh;
 			shellScript = "python $PROJECT_DIR/test-seq.py $BUILD_DIR/Debug/seq";
 		};
+		02EF016B19328E9000E1BD34 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "mpirun -n 2 $BUILD_DIR/Debug/seq";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -195,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02EF01691932893E00E1BD34 /* common.cpp in Sources */,
 				0280485E192E7041001CB8D4 /* Makefile in Sources */,
 				02804860192E7041001CB8D4 /* msp-par.c in Sources */,
 				0280485F192E7041001CB8D4 /* matgen-mt.c in Sources */,
@@ -206,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0280487519313EFE001CB8D4 /* msp-seq.cpp in Sources */,
+				02EF016A1932893E00E1BD34 /* common.cpp in Sources */,
 				028048711931186D001CB8D4 /* matgen-mt.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,6 +364,7 @@
 				02804858192E5BAC001CB8D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0280486C193117DE001CB8D4 /* Build configuration list for PBXNativeTarget "seq" */ = {
 			isa = XCConfigurationList;
@@ -350,6 +373,7 @@
 				0280486E193117DE001CB8D4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
