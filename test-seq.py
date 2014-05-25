@@ -20,7 +20,7 @@ for tests in [[[10, 64, 100][i/3], [10, 64, 100][i%3], random.randrange(1000)] f
   if out1 == out2:
     print "OK"
   else:
-    print "FAIL"
+    print "FAIL", ' '.join(map(lambda x: ' '.join(x.split(' ')[1:]), (out1, out2)))
     failed = True
   
 if failed:
