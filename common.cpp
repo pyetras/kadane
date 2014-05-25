@@ -16,6 +16,8 @@ struct timeval startTime;
 matrix_t max_sum;
 matrix_t * matrixPtr;
 
+extern void safe_exit(int code);
+
 void printMatrix(matrix_t const * m, int r, int c)
 {
   //  int i, j;
@@ -53,7 +55,6 @@ void printUsage(char const * prog)
   fprintf(stderr, "    %s <num_rows> <num_colums> <seed>\n\n", prog);
 }
 
-extern void safe_exit(int code);
 
 void initialize(int argc, char * argv[]){
   matgen_t * matgenPtr;

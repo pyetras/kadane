@@ -1,59 +1,100 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <mpi.h>
-#include "matgen.h"
+#include "common.h"
+#include <cmath>
 
-static void printUsage(char const * prog)
-{
-    fprintf(stderr, "Usage:\n");
-    fprintf(stderr, "    %s <num_rows> <num_colums> <seed>\n\n", prog);
+void safe_exit(int code){
+  MPI_Finalize();
+  exit(code);
 }
 
-static void printMatrix(long long int const * m, int r, int c)
-{
-    int i, j;
-    for (i = 0; i <= r; ++i)
-    {
-        for (j = 0; j <= c; ++j)
-        {
-            printf(" %lld", *m++);
-        }
-        printf("\n");
-    }
-    printf("\n");
+int nth_length(int n, int sum){
+  return std::ceil((std::sqrt(8.0*(sum - n) + 1.0) - 1.0)/2.0);
 }
 
 int main(int argc, char * argv[])
 {
-    int numRows, numColumns, seed;
-
-    MPI_Init(&argc, &argv);
-
-    if (argc != 4)
+  MPI_Init(&argc, &argv);
+  int numProcesses, myRank;
+  MPI_Comm_size(MPI_COMM_WORLD, &numProcesses);
+  MPI_Comm_rank(MPI_COMM_WORLD, &myRank);
+  
+  initialize(argc, argv);
+  
+  startTiming();
+  
+  for (int i = 0; i <= numColumns; ++i)
+  {
+    matrixPtr[at(0, i)] = 0;
+  }
+  for (int j = 1; j <= numRows; ++j)
+  {
+    matrixPtr[at(j, 0)] = 0;
+  }
+  printMatrix(matrixPtr, numRows, numColumns);
+  max_sum = matrixPtr[numColumns + 1 + 1];
+  bestI = bestJ = bestK = bestL = 1;
+  for (int j = 1; j <= numRows; ++j)
+  {
+    for (int i = 1; i <= numColumns; ++i)
     {
-        fprintf(stderr, "ERROR: Invalid arguments!\n");
-        printUsage(argv[0]);
-        MPI_Finalize();
-        exit(1);
+      if (matrixPtr[at(j, i)] > max_sum){
+        max_sum = matrixPtr[at(j, i)];
+        bestJ = j;
+        bestI = i;
+        bestK = j;
+        bestL = i;
+      }
+      matrixPtr[at(j, i)] +=
+      matrixPtr[at(j-1, i)];
     }
-    numRows = atoi(argv[1]);
-    numColumns = atoi(argv[2]);
-    seed = atoi(argv[3]);
-    if (numRows <= 0 || numColumns <= 0 || seed <= 0)
-    {
-        fprintf(stderr, "ERROR: Invalid arguments: %s %s %s!\n", argv[1],
-                argv[2], argv[3]);
-        printUsage(argv[0]);
-        MPI_Finalize();
-        exit(1);
+  }
+  
+  if (max_sum < 0){
+    if (myRank == 0)
+      printEnd();
+    free(matrixPtr);
+    safe_exit(0);
+  }
+  
+  int total_subsets = (numRows + 1)*numRows/2;
+  
+  for (int i = myRank; i < total_subsets; i += numProcesses){
+    int sub_length = nth_length(i, total_subsets);
+    int k = numRows - sub_length + 1;
+    int sub_start = total_subsets - sub_length*(sub_length+1)/2;
+    int pos_in_sub = i - sub_start;
+    int l = k + pos_in_sub;
+    
+    std::cout << myRank << ": " << k << ' ' << l << std::endl;
+    
+    matrix_t sum = 0, row_max_sum = 0;
+    int row_start = 1, row_finish = 0;
+    int current_start = 1;
+    for (int j = 1; j <= numColumns; ++j){
+      matrix_t val = matrixPtr[at(l, j)] - matrixPtr[at(k-1, j)];
+      sum += val;
+      if (sum < 0){
+        current_start = j + 1;
+        sum = 0;
+      }else if (sum > row_max_sum){
+        row_start = current_start;
+        row_max_sum = sum;
+        row_finish = j;
+      }
     }
+    
+    if (row_max_sum > max_sum){
+      max_sum = row_max_sum;
+      bestJ = k;
+      bestI = row_start;
+      bestK = l;
+      bestL = row_finish;
+    }
+    
+  }
 
-    /* FIXME */
-
-    fprintf(stderr, "PWIR2014_Jan_Kowalski_123456 Input: (%d,%d,%d) Solution: |(%d,%d),(%d,%d)|=%lld Time: %.10f\n",
-            numRows, numColumns, seed,
-            0, 0, 0, 0, 0L, 0.0f);
-
-    MPI_Finalize();
-    return 0;
+  if (myRank == 0)
+    printEnd();
+  free(matrixPtr);
+  safe_exit(0);
 }

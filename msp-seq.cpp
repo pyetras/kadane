@@ -61,7 +61,6 @@ int main(int argc, char * argv[])
   {
     for (int l = k; l <= numRows; ++l)
     {
-      cout << k << ' ' << l << endl;
       matrix_t sum = 0, row_max_sum = 0;
       int row_start = 1, row_finish = 0;
       int current_start = 1;

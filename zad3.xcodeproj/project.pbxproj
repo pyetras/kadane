@@ -14,6 +14,8 @@
 		0280487519313EFE001CB8D4 /* msp-seq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0280487419313EFE001CB8D4 /* msp-seq.cpp */; };
 		02EF01691932893E00E1BD34 /* common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02EF01671932893E00E1BD34 /* common.cpp */; };
 		02EF016A1932893E00E1BD34 /* common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02EF01671932893E00E1BD34 /* common.cpp */; };
+		02EF016E193293C800E1BD34 /* libmpi_cxx.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 02EF016C193293C800E1BD34 /* libmpi_cxx.dylib */; };
+		02EF016F193293C800E1BD34 /* libmpi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 02EF016D193293C800E1BD34 /* libmpi.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +49,8 @@
 		0280487419313EFE001CB8D4 /* msp-seq.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "msp-seq.cpp"; sourceTree = SOURCE_ROOT; };
 		02EF01671932893E00E1BD34 /* common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = common.cpp; sourceTree = "<group>"; };
 		02EF01681932893E00E1BD34 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		02EF016C193293C800E1BD34 /* libmpi_cxx.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpi_cxx.dylib; path = ../../../../../../../../usr/local/lib/libmpi_cxx.dylib; sourceTree = "<group>"; };
+		02EF016D193293C800E1BD34 /* libmpi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpi.dylib; path = ../../../../../../../../usr/local/lib/libmpi.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02EF016E193293C800E1BD34 /* libmpi_cxx.dylib in Frameworks */,
+				02EF016F193293C800E1BD34 /* libmpi.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +97,8 @@
 			isa = PBXGroup;
 			children = (
 				0280485C192E7041001CB8D4 /* msp-par.c */,
+				02EF016C193293C800E1BD34 /* libmpi_cxx.dylib */,
+				02EF016D193293C800E1BD34 /* libmpi.dylib */,
 			);
 			name = par;
 			path = zad3;
@@ -125,6 +133,7 @@
 				02804849192E5BAC001CB8D4 /* Sources */,
 				0280484A192E5BAC001CB8D4 /* Frameworks */,
 				0280484B192E5BAC001CB8D4 /* CopyFiles */,
+				02EF01701932A68300E1BD34 /* ShellScript */,
 				02EF016B19328E9000E1BD34 /* ShellScript */,
 			);
 			buildRules = (
@@ -206,7 +215,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mpirun -n 2 $BUILD_DIR/Debug/seq";
+			shellScript = "/usr/local/bin/mpirun -n 2 $BUILD_DIR/Debug/par 5 5 5";
+		};
+		02EF01701932A68300E1BD34 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "python $PROJECT_DIR/test-par.py $BUILD_DIR/Debug/par";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -311,6 +333,8 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"/usr/local/Cellar/open-mpi/1.8.1/**",
 				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = par;
 			};
 			name = Debug;
@@ -323,6 +347,8 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"/usr/local/Cellar/open-mpi/1.8.1/**",
 				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = par;
 			};
 			name = Release;
