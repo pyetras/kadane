@@ -4,21 +4,33 @@
 # Faculty of Mathematics, Informatics and Mechanics.
 # University of Warsaw, Warsaw, Poland.
 #
-# Copyright (C) Konrad Iwanicki, 2014.
+# Copyright (C) Piotr Sokolski, 2014.
 #
 
-MPICC = mpicc
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+	MPICC = g++
+	LDFLAGS =  -stdlib=libc++ -lmpi_cxx -lmpi
+else
+	MPICC = mpicc -cc=/bgsys/drivers/V1R4M2_200_2010-100508P/ppc/gnu-linux/powerpc-bgp-linux/bin/g++
+	LDFLAGS =
+endif
+
+CCFLAGS = -DPROFILING
+
 MATGEN_TYPE ?= matgen-mt
 MATGEN_FILE = $(MATGEN_TYPE).o 
 
 all: msp-seq-naive.exe msp-par.exe
 
+msp-par.exe: msp-par.o common.o $(MATGEN_FILE)
+	$(MPICC) -O3 -o $@ $(LDFLAGS) $^
 
-%.exe: %.o $(MATGEN_FILE)
-	$(MPICC) -O3 -o $@ $^
+msp-seq-naive.exe: msp-seq-naive.o $(MATGEN_FILE)
+	$(MPICC) -O3 -o $@ $(LDFLAGS) $^
 
-%.o: %.c matgen.h Makefile
-	$(MPICC) -O3 -c -o $@ $<
+%.o: %.c matgen.h common.h Makefile
+	$(MPICC) $(CCFLAGS) -O3 -c -o $@ $<
 
 clean:
 	rm -f *.o *core *~ *.out *.err *.exe

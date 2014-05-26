@@ -133,8 +133,8 @@
 				02804849192E5BAC001CB8D4 /* Sources */,
 				0280484A192E5BAC001CB8D4 /* Frameworks */,
 				0280484B192E5BAC001CB8D4 /* CopyFiles */,
-				02EF01701932A68300E1BD34 /* ShellScript */,
 				02EF016B19328E9000E1BD34 /* ShellScript */,
+				02EF01701932A68300E1BD34 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -334,6 +334,10 @@
 					"/usr/local/Cellar/open-mpi/1.8.1/**",
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DPROFILING",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = par;
 			};
@@ -348,6 +352,10 @@
 					"/usr/local/Cellar/open-mpi/1.8.1/**",
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DPROFILING",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = par;
 			};

@@ -13,7 +13,7 @@ for tests in [[[10, 64, 100][i/3], [10, 64, 100][i%3], random.randrange(1000)] f
   t1 = subprocess.Popen(map(str, args), stderr=subprocess.PIPE, stdout=DEVNULL)
   out1 = t1.communicate()[1].strip().split(' Time')[0]
   
-  args = ['/usr/local/bin/mpirun', '-n', '1', os.path.join(wd, sys.argv[1])] + tests
+  args = ['/usr/local/bin/mpirun', '-n', '4', os.path.join(wd, sys.argv[1])] + tests
   t2 = subprocess.Popen(map(str, args), stderr=subprocess.PIPE, stdout=DEVNULL)
   out2 = t2.communicate()[1].strip().split(' Time')[0]
   
