@@ -16,7 +16,7 @@ else
 	LDFLAGS =
 endif
 
-CCFLAGS = -DPROFILING
+CCFLAGS =
 
 MATGEN_TYPE ?= matgen-mt
 MATGEN_FILE = $(MATGEN_TYPE).o 

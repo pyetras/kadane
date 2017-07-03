@@ -33,4 +33,5 @@ for n in nodes:
     name = 'MSP_4000_4000_%s_%s_%s'%(seed, n, p)
     j = job%({'name': name, 'nodes': n, 'proc': procname[p], 'nproc': p*n, 'seed': seed})
     print>>open('jobs/%s.ll'%name, 'w'), j
+    print 'llsubmit %s.ll'%name
 
